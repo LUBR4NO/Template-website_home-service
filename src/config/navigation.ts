@@ -7,3 +7,5 @@ export const navigationLinks = [
   { id: 'faq', label: 'FAQ' },
   { id: 'final-cta', label: 'Contacto' },
 ] as const;
+
+export const serviceAreaPlaceholders = ['Área 1', 'Área 2', 'Área 3', 'Área 4'] as const;
