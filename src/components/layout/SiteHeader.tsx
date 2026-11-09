@@ -3,7 +3,6 @@ import { Menu, X } from 'lucide-react';
 import { business } from '@/config/business';
 import { navigationLinks } from '@/config/navigation';
 import { scrollToSection } from '@/lib/scroll';
-import { MobileMenu } from '@/components/layout/MobileMenu';
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,7 +68,32 @@ export function SiteHeader() {
         </button>
       </div>
 
-      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} onNavigate={handleNavigate} />
+      <div
+        id="mobile-menu"
+        className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out md:hidden ${
+          isMenuOpen ? 'grid-rows-[1fr] border-t border-gray-200' : 'grid-rows-[0fr]'
+        }`}
+      >
+        <nav aria-label="Menu móvel" className="min-h-0">
+          <ul className="flex flex-col px-4 py-2">
+            {navigationLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  tabIndex={isMenuOpen ? 0 : -1}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavigate(link.id);
+                  }}
+                  className="block rounded-md px-3 py-3 text-base font-medium text-gray-800 transition-colors hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }
