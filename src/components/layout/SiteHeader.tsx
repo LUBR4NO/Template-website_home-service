@@ -11,6 +11,33 @@ const areaOptions = ['Área 1', 'Área 2', 'Área 3', 'Área 4'];
 const hasPhone = business.phoneNumber.length > 0;
 const phoneLabel = business.phoneDisplay || business.phoneNumber || '(xx) xxxxx-xxxx';
 
+interface BrandLogoProps {
+  onClick: () => void;
+}
+
+function BrandLogo({ onClick }: BrandLogoProps) {
+  return (
+    <a
+      href="#hero"
+      onClick={(event) => {
+        event.preventDefault();
+        onClick();
+      }}
+      className="shrink-0"
+    >
+      {business.logoImage ? (
+        <img
+          src={business.logoImage}
+          alt={business.name}
+          className="block h-auto w-auto max-h-12 max-w-[160px] object-contain"
+        />
+      ) : (
+        <span className="text-lg font-bold tracking-wide text-gray-900">{business.logoText}</span>
+      )}
+    </a>
+  );
+}
+
 interface DrawerAccordionProps {
   label: string;
   panelId: string;
@@ -103,16 +130,7 @@ export function SiteHeader() {
   return (
     <header className="relative border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <a
-          href="#hero"
-          onClick={(event) => {
-            event.preventDefault();
-            handleNavigate('hero');
-          }}
-          className="text-lg font-bold tracking-wide text-gray-900"
-        >
-          {business.logoText}
-        </a>
+        <BrandLogo onClick={() => handleNavigate('hero')} />
 
         <nav aria-label="Principal" className="hidden md:block">
           <ul className="flex items-center gap-6">
@@ -147,16 +165,7 @@ export function SiteHeader() {
 
       <div id="mobile-menu" className={drawerClass} aria-hidden={!isMenuOpen}>
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4">
-          <a
-            href="#hero"
-            onClick={(event) => {
-              event.preventDefault();
-              handleNavigate('hero');
-            }}
-            className="text-lg font-bold tracking-wide text-gray-900"
-          >
-            {business.logoText}
-          </a>
+          <BrandLogo onClick={() => handleNavigate('hero')} />
           <button
             type="button"
             onClick={() => setIsMenuOpen(false)}

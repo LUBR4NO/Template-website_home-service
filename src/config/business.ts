@@ -5,6 +5,7 @@
 export const business = {
   name: 'Sua Empresa',
   logoText: 'SUA MARCA',
+  logoImage: 'https://placehold.co/160x48/1a1a1a/ffffff?text=SUA+MARCA',
   phoneNumber: '',
   phoneDisplay: '',
   whatsappNumber: '',
